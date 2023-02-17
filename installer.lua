@@ -7,6 +7,9 @@ local function downloadFile(path)
     local file_handle = fs.open("/keyboard/"..path, "w")
 
     file_handle.write(http_handle.readAll())
+    
+    file_handle.close()
+    http_handle.close()
 end
 
 downloadFile("main.lua")
