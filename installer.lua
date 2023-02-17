@@ -1,4 +1,4 @@
-local URL = "https://raw.githubusercontent.com/SynicalMX/cc-remote-keyboard/master/src/"
+local URL = "https://raw.githubusercontent.com/SynicalMX/cc-remote-keyboard/main/src/"
 
 local function downloadFile(path)
     local url = URL..path
