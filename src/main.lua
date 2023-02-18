@@ -71,4 +71,4 @@ parallel.waitForAny(modemManager, click)
 term.setBackgroundColor(colors.black)
 term.setCursorPos(1,1)
 term.clear()
-
+os.queueEvent("mx.appQuit")
