@@ -18,6 +18,7 @@ drawing:drawStart()
 drawing:drawKeyboard(lines)
 
 buttons:createButton(termX, 1, termX, 1, function ()
+    drawing:drawStatus("Quiting...")
     running = false
 end)
 
@@ -48,9 +49,6 @@ local function modemManager()
     else
         drawing:drawStatus("Waiting for modem.")
         repeat
-            if running ~= true then
-                return
-            end
             local event, side = os.pullEvent("peripheral")
             local periph = peripheral.getType(side)
             if periph == "modem" then
@@ -61,10 +59,7 @@ local function modemManager()
 end
 
 local function click()
-    while true do
-        if running ~= true then
-            break
-        end
+    while running do
         local event, button, x, y = os.pullEvent("mouse_click")
         if button == 1 then
             buttons:update(x, y)
@@ -72,7 +67,8 @@ local function click()
     end
 end
 
-parallel.waitForAll(modemManager, click)
+parallel.waitForAny(modemManager, click)
 term.setBackgroundColor(colors.black)
 term.setCursorPos(1,1)
-print("Remote Keyboard by Synical")
+term.clear()
+
